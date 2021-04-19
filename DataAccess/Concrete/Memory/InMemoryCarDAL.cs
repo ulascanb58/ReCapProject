@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -26,6 +27,16 @@ namespace DataAccess.Concrete
         public List<NCar> GetAll()
         {
             return _cars.ToList();
+        }
+
+        public List<NCar> GetAll(Expression<Func<NCar, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public NCar Get(Expression<Func<NCar, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(NCar car)

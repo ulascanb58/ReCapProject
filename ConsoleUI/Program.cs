@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Business.Concrete;
 using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
 namespace ConsoleUI
@@ -10,35 +11,43 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            InMemoryCarDAL memoryCarDal = new InMemoryCarDAL();
-            CarManager carManager=new CarManager(memoryCarDal);
-
-            
-
-           NCar car1 = new NCar();
-           car1.Description = "test";
-           car1.Id = 6;
-           car1.ModelYear = 1500;
-            carManager.Add(car1);
-
-            
-           
-         // carManager.Delete(car1);
-
+           CarManager carManager = new CarManager(new EfCarDAL());
+/*
            foreach (var items in carManager.GetAll())
            {
                Console.WriteLine(items.Description);
-           }
-           Console.WriteLine("-------get by id----------");
-           foreach (var itemsCar in carManager.GetById(6))
-           {
-            Console.WriteLine(itemsCar.Description);   
-           }
+               
+           }*/
 
-           car1.ModelYear = 1890;
-            carManager.Update(car1);
+/*
+           foreach (var items in carManager.GetCarsByBrandId(3))
+           {    
+               Console.WriteLine(items.Description);
+           }
+          */
+
+
+            /*foreach (var items in carManager.GetCarsByColorId(1))
+            {
+                Console.WriteLine("Renk ID : " +items.ColorId + " - " + items.Description);
+            }*/
+            /*
+            NCar araba1 = new NCar();
           
-       
+            araba1.BrandId = 5;
+            araba1.ColorId = 2;
+            araba1.ModelYear = 2017;
+            araba1.Description = "Bentley 3";
+            araba1.DailyPrice = 95000;
+            carManager.AddCar(araba1);
+            */
+
+            foreach (var items in carManager.GetAll())
+            {
+                Console.WriteLine(items.Description);
+
+            }
+          
 
             Console.Read();
         }
