@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Entities.Abstract;
+using DataAccess.CoreLayer;
 
 namespace Entities.Concrete
 {
