@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using CoreLayer.Utilities.Results.Abstract;
+using CoreLayer.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -18,57 +21,69 @@ namespace Business.Concrete
         }
 
 
-        public List<NCar> GetAll()
+        public IDataResult<List<NCar>> GetAll()
         {
-            return _iCarDal.GetAll();
+            if (DateTime.Now.Hour==16)
+            {
+                return new ErrorDataResult<List<NCar>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll());
         }
 
-        public List<NCar> GetCarsByBrandId(int id)
+        public IDataResult<List<NCar>> GetCarsByBrandId(int id)
         {
-            return _iCarDal.GetAll(p => p.BrandId == id);
+            return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(p => p.BrandId == id));  
         }
 
-        public List<NCar> GetCarsByColorId(int id)
+        public IDataResult<List<NCar>> GetCarsByColorId(int id)
         {
-            return _iCarDal.GetAll(p => p.ColorId == id);
+            return  new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(p => p.ColorId == id));
         }
 
 
-        public NCar GetCarsById(int id)
+        public IDataResult<NCar> GetCarsById(int id)
         {
-            return _iCarDal.Get(c => c.Id == id);
+            return new SuccessDataResult<NCar>(_iCarDal.Get(c => c.Id == id)); 
         }
 
-        public void AddCar(NCar car)
+        public IResult AddCar(NCar car)
         {
             if (car.Description.Length > 2 && car.DailyPrice > 0)
             {
                 _iCarDal.Add(car);
+                return new SuccessResult(Messages.CarAdded);
+                
             }
-            else
-            {
-                Console.WriteLine("Araba ismi minimum 2 karakter olmalıdır, Araba günlük fiyatı 0'dan büyük olmalıdır.");
-            }
+
+           ;
+            return new ErrorResult(Messages.CarNameInvalid);
+            
+           
         }
 
-        public void Delete(NCar car)
+        public IResult Delete(NCar car)
         {
-           _iCarDal.Delete(car);
+            _iCarDal.Delete(car);
+            return new SuccessResult(Messages.CarDeleted);
+           
         }
 
-        public void Update(NCar car)
+        public IResult Update(NCar car)
         {
             _iCarDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+           
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _iCarDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_iCarDal.GetCarDetails());
+           
         }
 
-        public List<NCar> GetByDailyPrice(decimal min, decimal max)
+        public IDataResult<List<NCar>> GetByDailyPrice(decimal min, decimal max)
         {
-            return _iCarDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
+            return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max)); 
         }
     }
 }

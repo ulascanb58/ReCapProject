@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using CoreLayer.Utilities.Results.Abstract;
+using CoreLayer.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -16,29 +19,44 @@ namespace Business.Concrete
            _iBrandDal = brandDal;
 
        }
-        public List<NBrand> GetAll()
+        public IDataResult<List<NBrand>> GetAll()
         {
-           return _iBrandDal.GetAll();
+            return new SuccessDataResult<List<NBrand>>(_iBrandDal.GetAll());
         }
 
-        public NBrand GetById(int BrandId)
+        public IDataResult<NBrand>GetById(int BrandId)
         {
-            return _iBrandDal.Get(b => b.Id == BrandId);
+            return new SuccessDataResult<NBrand>(_iBrandDal.Get(b => b.Id == BrandId)); 
         }
 
-        public void AddBrand(NBrand brand)
+        public IResult AddBrand(NBrand brand)
         {
-            _iBrandDal.Add(brand);
+
+            
+            if (brand.BrandName.Length > 2)
+            {
+                _iBrandDal.Add(brand);
+                return new SuccessResult(Messages.BrandAdded);
+            }
+            else
+            {
+                return new ErrorResult(Messages.BrandNameInvalid);
+            }
+            
+
         }
 
-        public void DeleteBrand(NBrand brand)
+        public IResult  DeleteBrand(NBrand brand)
         {
+
             _iBrandDal.Delete(brand);
+            return  new SuccessResult(Messages.BrandDeleted);
         }
 
-        public void UpdateBrand(NBrand brand)
+        public IResult UpdateBrand(NBrand brand)
         {
             _iBrandDal.Update(brand);
+            return  new SuccessResult(Messages.BrandUpdated);
         }
    }
 }
