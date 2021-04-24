@@ -53,9 +53,9 @@ namespace Business.Concrete
                 _iCarDal.Add(car);
                 return new SuccessResult(Messages.CarAdded);
                 
-            }
+            };
 
-           ;
+
             return new ErrorResult(Messages.CarNameInvalid);
             
            

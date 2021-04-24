@@ -5,6 +5,7 @@ using Business.Concrete;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ConsoleUI
 {
@@ -14,27 +15,108 @@ namespace ConsoleUI
         {
             // BrandTest();
             // CarDetails();
-             ///AddCar();
-           //  GetCarDescription();
+            // AddCar();
+            //  GetCarDescription();
             //BrandTest();
-            ColorTest();
+            //ColorTest();
             //GetCarByBrandId(1);
-           // GetCarByColorId(1);
+            // GetCarByColorId(1);
+            // RentalAddTest();
+            //GetCarById(1);
+            // AddCustomer();
+            //RentalAddTest();
+            // RentalDetailsTest();
+            //CustomerDetailsTest();
 
-           //GetCarById(1);
+            // GetCarByPrice(5,950000);
 
-         
+            //RenkSilmeTesti();
 
-          // GetCarByPrice(5,950000);
+            UserAddTest();
+            GetUserList();
+            
 
-          //RenkSilmeTesti();
 
-
-
-          Console.Read();
+            Console.Read();
         }
 
-        
+        private static void RentalAddTest()
+        {
+            Console.WriteLine("------------------Araç Kiralama------------------------");
+            RentalManager rentalManager = new RentalManager(new EfRentalDAL());
+            NRental rental1 = new NRental();
+            rental1.CarId = 1;
+            rental1.CustomerId = 6;
+           
+            rental1.RentDate=DateTime.Now;
+            
+          
+           
+            var rental = rentalManager.Add(rental1);
+            Console.WriteLine(rental.Message);
+        }
+        static void AddCustomer()
+        {
+            NCustomer customer = new NCustomer();
+            customer.UserId = 1;
+            customer.CompanyName = "Company 1";
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDAL());
+            customerManager.Add(customer);
+            Console.WriteLine(customerManager);
+        }
+        private static void RentalDetailsTest()
+        {
+            Console.WriteLine("------------------Araç Kiralama Detay------------------------");
+            RentalManager rentalManager = new RentalManager(new EfRentalDAL());
+            var result = rentalManager.GetRentalDetails();
+            if (result.Success == true)
+            {
+                foreach (var rental in result.Data)
+                {
+                    Console.WriteLine("Araba Adı: {0} - Kiralandığı Tarih: {1} - Teslim Tarihi: {2} - Kampanya: {3}", rental.CarName, rental.RentDate, rental.ReturnDate, rental.CompanyName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+        private static void CustomerDetailsTest()
+        {
+            Console.WriteLine("------------------Müşteri Detay------------------------");
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDAL());
+            var result = customerManager.GetCustomerDetails();
+            if (result.Success == true)
+            {
+                foreach (var customer in result.Data)
+                {
+                    Console.WriteLine("Müşteri No: {0} - Adı: {1} - Soyadı: {2} - Kampanya: {3}", customer.UserId, customer.FirstName, customer.LastName, customer.CompanyName);
+                }
+            }
+        }
+
+        private static void UserAddTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDAL());
+            NUser user = new NUser();
+            user.FirstName = "Yeni user";
+            user.LastName = "Yeni soyad";
+            user.Email = "asdsad@gmail.com";
+            user.Password = "1234";
+            userManager.Add(user);
+            
+
+        }
+
+        private static void GetUserList()
+        {
+            UserManager userManager = new UserManager(new EfUserDAL());
+            var result= userManager.GetAll();
+            foreach (var items in result.Data)
+            {
+                Console.WriteLine(items.FirstName);   
+            }
+        }
         private static void RenkSilmeTesti()
         {
             NColor color = new NColor();
@@ -127,9 +209,9 @@ namespace ConsoleUI
             CarManager Carmanager = new CarManager(new EfCarDAL());
             
            
-           var result= Carmanager.AddCar(new NCar{BrandId = 1,ColorId = 2,DailyPrice = 8000,Description ="Yeni araba5"});
+           var result= Carmanager.AddCar(new NCar{BrandId = 1,ColorId = 2,DailyPrice = 8000,Description ="Yeni araba6"});
            Console.WriteLine(result.Message);
-           
+          
             
         }
 

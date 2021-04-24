@@ -14,9 +14,13 @@ namespace DataAccess.Concrete.EntityFramework
         }
 
 
-        public DbSet<NCar> TBLCARS { get; set; }
-        public DbSet<NBrand> TBLBRANDS { get; set; }
-        public DbSet<NColor> TBLCOLORS { get; set; }
+        public DbSet<NCar> TBL_CARS { get; set; }
+        public DbSet<NBrand> TBL_BRANDS { get; set; }
+        public DbSet<NColor> TBL_COLORS { get; set; }
+        public DbSet<NCustomer> TBL_CUSTOMERS { get; set; }
+        public DbSet<NUser> TBL_USERS { get; set; }
+        public DbSet<NRental>TBL_RENTALS { get; set; }
+
     }
 
 

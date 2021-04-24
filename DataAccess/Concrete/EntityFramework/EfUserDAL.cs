@@ -7,10 +7,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDAL:EfEntityRepositoryBase<NColor,ProjectDBContext>,IColorDAL
+    public class EfUserDAL:EfEntityRepositoryBase<NUser,ProjectDBContext>,IUserDAL
     {
-
-     
-    
     }
 }
