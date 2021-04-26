@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
@@ -25,19 +26,18 @@ namespace Business.Concrete
         public IResult Add(NRental rental)
         {
 
-            var result = _iRentalDal.GetAll(r=>r.CarId==rental.CarId&& r.ReturnDate==null);
+            var result = _iRentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate == null);
             if (result.Any())
             {
-                return  new ErrorResult(Messages.RentalDateInvalid);
+                return new ErrorResult(Messages.RentalDateInvalid);
             }
             else
             {
                 _iRentalDal.Add(rental);
                 return new SuccessResult(Messages.RentalAdded);
-
             }
-         
-            
+
+
         }
 
         public IResult Delete(NRental rental)

@@ -24,7 +24,7 @@ namespace ConsoleUI
             // RentalAddTest();
             //GetCarById(1);
             // AddCustomer();
-            //RentalAddTest();
+            RentalAddTest();
             // RentalDetailsTest();
             //CustomerDetailsTest();
 
@@ -32,8 +32,8 @@ namespace ConsoleUI
 
             //RenkSilmeTesti();
 
-            UserAddTest();
-            GetUserList();
+           // UserAddTest();
+            //GetUserList();
             
 
 
@@ -44,15 +44,15 @@ namespace ConsoleUI
         {
             Console.WriteLine("------------------Araç Kiralama------------------------");
             RentalManager rentalManager = new RentalManager(new EfRentalDAL());
-            NRental rental1 = new NRental();
-            rental1.CarId = 1;
-            rental1.CustomerId = 6;
+            NRental rental2 = new NRental();
+            rental2.CarId = 2;
+            rental2.CustomerId = 6;
            
-            rental1.RentDate=DateTime.Now;
-            
-          
-           
-            var rental = rentalManager.Add(rental1);
+     
+            rental2.ReturnDate=DateTime.Now;
+
+
+            var rental = rentalManager.Add(rental2);
             Console.WriteLine(rental.Message);
         }
         static void AddCustomer()
