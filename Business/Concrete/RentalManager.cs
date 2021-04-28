@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.DataAccess;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
@@ -23,11 +25,13 @@ namespace Business.Concrete
        {
            _iRentalDal = iRentalDal;
        }
+
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(NRental rental)
         {
 
-            var result = _iRentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate == null);
-            if (result.Any())
+            
+            if (rental.ReturnDate==null)
             {
                 return new ErrorResult(Messages.RentalDateInvalid);
             }
@@ -46,6 +50,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalDeleted);
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(NRental rental)
         {
             _iRentalDal.Update(rental);

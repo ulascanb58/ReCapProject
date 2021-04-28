@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,6 +21,8 @@ namespace Business.Concrete
         {
             _iCustomerDal = customerDal;
         }
+
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(NCustomer customer)
         {
             _iCustomerDal.Add(customer);
@@ -31,6 +35,7 @@ namespace Business.Concrete
             return  new SuccessResult(Messages.CustomerDeleted);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(NCustomer customer)
         {
             _iCustomerDal.Update(customer);

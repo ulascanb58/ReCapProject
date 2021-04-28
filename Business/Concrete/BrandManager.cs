@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -29,6 +31,7 @@ namespace Business.Concrete
             return new SuccessDataResult<NBrand>(_iBrandDal.Get(b => b.Id == BrandId)); 
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult AddBrand(NBrand brand)
         {
 
@@ -53,6 +56,7 @@ namespace Business.Concrete
             return  new SuccessResult(Messages.BrandDeleted);
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult UpdateBrand(NBrand brand)
         {
             _iBrandDal.Update(brand);

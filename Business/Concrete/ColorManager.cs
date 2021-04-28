@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -30,6 +32,7 @@ namespace Business.Concrete
            return new SuccessDataResult<NColor>(_iColorDal.Get(c => c.Id == ColorId));
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult UpdateColor(NColor color)
         {
             _iColorDal.Update(color);
@@ -43,6 +46,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ColorDeleted);
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult AddColor(NColor color)
         {
             _iColorDal.Add(color);
