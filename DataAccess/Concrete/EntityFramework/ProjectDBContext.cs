@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class ProjectDBContext:DbContext
+    public class ProjectDBContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,8 +19,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<NColor> TBL_COLORS { get; set; }
         public DbSet<NCustomer> TBL_CUSTOMERS { get; set; }
         public DbSet<NUser> TBL_USERS { get; set; }
-        public DbSet<NRental>TBL_RENTALS { get; set; }
-
+        public DbSet<NRental> TBL_RENTALS { get; set; }
+        public DbSet<NCarImage> TBL_CARIMAGES { get; set; }
     }
 
 
