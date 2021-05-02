@@ -64,7 +64,7 @@ namespace Business.Concrete
             return new SuccessResult("Messages.ImageDeleted");
         }
 
-        public IDataResult<NCarImage> Get(int Id)
+        public IDataResult<NCarImage> GetById(int Id)
         {
             return new SuccessDataResult<NCarImage>(_iCarImageDal.Get(p => p.CarId == Id));
         }
@@ -74,10 +74,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<NCarImage>>(_iCarImageDal.GetAll(), "Messages.ImagesListed");
         }
 
-        public IDataResult<List<NCarImage>> GetById(int carId)
-        {
-            return new SuccessDataResult<List<NCarImage>>(_iCarImageDal.GetAll(c => c.CarId == carId), "Messages.ImagesListed");
-        }
+       
 
         public IDataResult<List<NCarImage>> GetImagesByCarId(int carId)
         {
@@ -138,6 +135,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<NCarImage>>(_iCarImageDal.GetAll(p => p.CarId == carId).ToList());
         }
 
-
+      
     }
 }
