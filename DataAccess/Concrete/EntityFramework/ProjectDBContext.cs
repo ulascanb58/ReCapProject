@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CoreLayer.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<NUser> TBL_USERS { get; set; }
         public DbSet<NRental> TBL_RENTALS { get; set; }
         public DbSet<NCarImage> TBL_CARIMAGES { get; set; }
+        public DbSet<NOperationClaim> TBL_OPERATION_CLAIMS { get; set; }
+        public DbSet<NUserOperationClaim> TBL_USER_OPERATION_CLAIMS { get; set; }
     }
 
 

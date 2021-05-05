@@ -6,6 +6,7 @@ using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using CoreLayer.Aspects.Autofac.Validation;
+using CoreLayer.Entities.Concrete;
 using CoreLayer.Utilities.Results.Abstract;
 using CoreLayer.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -50,6 +51,18 @@ namespace Business.Concrete
         {
             _iUserDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
+        }
+
+       
+
+        public NUser GetByMail(string email)
+        {
+            return _iUserDal.Get(u => u.Email == email);
+        }
+
+        public List<NOperationClaim> GetClaims(NUser user)
+        {
+            return _iUserDal.GetClaims(user);
         }
     }
 }

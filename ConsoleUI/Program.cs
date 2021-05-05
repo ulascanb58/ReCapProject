@@ -102,7 +102,7 @@ namespace ConsoleUI
             user.FirstName = "Yeni user";
             user.LastName = "Yeni soyad";
             user.Email = "asdsad@gmail.com";
-            user.Password = "1234";
+          
             userManager.Add(user);
             
 

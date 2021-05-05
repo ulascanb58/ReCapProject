@@ -4,6 +4,7 @@ using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using CoreLayer.Utilities.Interceptors;
+using CoreLayer.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
@@ -36,6 +37,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDAL>().As<IUserDAL>().SingleInstance();
 
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            builder.RegisterType<JWTHelper>().As<ITokenHelper>().SingleInstance();
 
             builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
             builder.RegisterType<EfCarImageDAL>().As<ICarImageDAL>().SingleInstance();

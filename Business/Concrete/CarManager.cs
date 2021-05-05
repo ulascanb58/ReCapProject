@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using CoreLayer.Aspects.Autofac.Validation;
@@ -49,7 +50,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<NCar>(_iCarDal.Get(c => c.Id == id));
         }
-
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult AddCar(NCar car)
         {
