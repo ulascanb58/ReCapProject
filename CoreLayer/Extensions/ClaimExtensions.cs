@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Linq;
 
 namespace CoreLayer.Extensions
 {
     public static class ClaimExtensions
     {
-        //ICollection method'un genişletildiği anlamına gelir
         public static void AddEmail(this ICollection<Claim> claims, string email)
         {
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, email));
@@ -31,4 +30,3 @@ namespace CoreLayer.Extensions
         }
     }
 }
-

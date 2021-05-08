@@ -5,6 +5,8 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Caching;
+using CoreLayer.Aspects.Autofac.Performance;
 using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.CrossCuttingConcerns.Validation;
 using CoreLayer.Utilities.Results.Abstract;
@@ -24,14 +26,16 @@ namespace Business.Concrete
         {
             _iCarDal = carDal;
         }
-
-
+       
+        [CacheAspect]
+     //   [PerformanceAspect(50)]
         public IDataResult<List<NCar>> GetAll()
         {
             if (DateTime.Now.Hour == 5)
             {
                 return new ErrorDataResult<List<NCar>>(Messages.MaintenanceTime);
             }
+
             return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll());
         }
 
@@ -45,13 +49,20 @@ namespace Business.Concrete
             return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(p => p.ColorId == id));
         }
 
+        [CacheAspect]
 
         public IDataResult<NCar> GetCarsById(int id)
         {
             return new SuccessDataResult<NCar>(_iCarDal.Get(c => c.Id == id));
         }
+
+
+        
         [SecuredOperation("car.add,admin")]
+
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
+
         public IResult AddCar(NCar car)
         {
 
@@ -73,6 +84,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
 
         }
+        [CacheRemoveAspect("ICarService.Get")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(NCar car)
         {
