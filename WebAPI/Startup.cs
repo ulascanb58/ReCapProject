@@ -59,6 +59,7 @@ namespace WebApi
             services.AddSingleton<IBrandService, BrandManager>();
             services.AddSingleton<IBrandDAL, EfBrandDAL>();*/
 
+            services.AddCors();
 
           
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<NTokenOptions>();
@@ -91,6 +92,7 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3535").AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();

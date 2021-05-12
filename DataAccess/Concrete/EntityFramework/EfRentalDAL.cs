@@ -12,27 +12,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfRentalDAL:EfEntityRepositoryBase<NRental,ProjectDBContext>,IRentalDAL
+    public class EfRentalDAL : EfEntityRepositoryBase<NRental, ProjectDBContext>, IRentalDAL
     {
         public List<RentalDetailDto> GetRentalDetails(Expression<Func<NRental, bool>> filter = null)
         {
             using (ProjectDBContext context1 = new ProjectDBContext())
             {
                 var result = from ca in context1.TBL_CARS
-                    join re in context1.TBL_RENTALS
-                        on ca.Id equals  re.CarId
-                    join cu in context1.TBL_CUSTOMERS
-                        on re.CustomerId equals cu.CustomerId
-                        join u in context1.TBL_USERS
-                            on cu.UserId equals  u.Id
-                    select new RentalDetailDto
-                    {
-                        CarName = ca.Description,
-                        CompanyName = cu.CompanyName,
-                        RentDate = re.RentDate,
-                        ReturnDate = re.ReturnDate
-                        
-                    };
+                             join re in context1.TBL_RENTALS
+                                 on ca.Id equals re.CarId
+                             join cu in context1.TBL_CUSTOMERS
+                                 on re.CustomerId equals cu.CustomerId
+                             join u in context1.TBL_USERS
+                                 on cu.UserId equals u.Id
+                             join br in context1.TBL_BRANDS
+                             on ca.BrandId equals br.Id
+                             
+                             select new RentalDetailDto
+                             {
+                                 Id = re.Id,
+                                 BrandName = br.BrandName,
+                                 CarName = ca.Description,
+                                 CompanyName = u.FirstName+" "+u.LastName,
+                                 RentDate = re.RentDate,
+                                 ReturnDate = re.ReturnDate
+
+                             };
                 return result.ToList();
             }
         }
