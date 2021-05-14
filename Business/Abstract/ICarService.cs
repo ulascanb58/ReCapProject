@@ -11,15 +11,23 @@ namespace Business.Abstract
    {
        // data listeleyenler
         IDataResult<List<NCar>> GetAll();
-
+        /*
         IDataResult<List<NCar>> GetCarsByBrandId(int id);
 
         IDataResult<List<NCar>> GetCarsByColorId(int id);
+        */
+
+        IDataResult<List<CarDetailDto>> GetCarsByBrandId(int id);
+
+        IDataResult<List<CarDetailDto>> GetCarsByColorId(int id);
+
+        IDataResult<List<CarDetailDto>> GetCarById(int id);
 
         IDataResult<List<CarDetailDto>> GetCarDetails();
+    
 
         IDataResult<List<NCar>> GetByDailyPrice(decimal min, decimal max);
-        IDataResult<NCar> GetCarsById(int id);
+       // IDataResult<NCar> GetCarsById(int id);
 
         // voidler
 

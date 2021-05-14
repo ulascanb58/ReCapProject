@@ -38,7 +38,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll());
         }
-
+/*
         public IDataResult<List<NCar>> GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(p => p.BrandId == id));
@@ -48,13 +48,27 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(p => p.ColorId == id));
         }
+*/
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_iCarDal.GetCarDetails(p => p.BrandId == id));
+        }
+
+       public  IDataResult<List<CarDetailDto>>GetCarsByColorId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_iCarDal.GetCarDetails(p => p.ColorId == id));
+        }
+        public IDataResult<List<CarDetailDto>> GetCarById(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_iCarDal.GetCarDetails(p => p.CarId== id));
+        }
 
         [CacheAspect]
 
-        public IDataResult<NCar> GetCarsById(int id)
+       /* public IDataResult<NCar> GetCarsById(int id)
         {
             return new SuccessDataResult<NCar>(_iCarDal.Get(c => c.Id == id));
-        }
+        }*/
 
 
         
@@ -103,5 +117,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<NCar>>(_iCarDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
+
+      
     }
 }

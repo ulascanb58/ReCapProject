@@ -74,5 +74,9 @@ namespace DataAccess.Concrete
             return _cars.Where(p => p.Id == Id).ToList();
         }
 
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
