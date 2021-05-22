@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using DataAccess.CoreLayer;
 
@@ -8,7 +9,8 @@ namespace Entities.Concrete
 {
    public class NBrand:IEntity
     {
-        public int Id { get; set; }
+        [Key]
+        public int brandId { get; set; }
         public string BrandName { get; set; }
     }
 }

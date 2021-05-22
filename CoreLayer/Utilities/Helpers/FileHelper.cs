@@ -61,8 +61,8 @@ namespace CoreLayer.Utilities.Helpers
 
             var newPath = Guid.NewGuid().ToString() + fileExtension;
 
-
-            return @"\Images\" + newPath;
+          
+           return @"\Images\" + newPath;
         }
     }
 }

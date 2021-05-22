@@ -90,7 +90,7 @@ namespace Business.Concrete
         }
         private List<NCarImage> ShowDefaultImage(int carId)
         {
-            string path = @"\Images\ghost.png";
+            string path = @"\Images\logo.png";
             var result = _carImageDal.GetAll(c => c.CarId == carId).Any();
 
             if (result)

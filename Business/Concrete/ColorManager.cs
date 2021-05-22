@@ -29,7 +29,7 @@ namespace Business.Concrete
         public IDataResult<NColor> GetById(int ColorId)
         {
          
-           return new SuccessDataResult<NColor>(_iColorDal.Get(c => c.Id == ColorId));
+           return new SuccessDataResult<NColor>(_iColorDal.Get(c => c.colorId == ColorId));
         }
 
         [ValidationAspect(typeof(ColorValidator))]

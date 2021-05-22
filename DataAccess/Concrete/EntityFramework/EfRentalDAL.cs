@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join u in context1.TBL_USERS
                                  on cu.UserId equals u.Id
                              join br in context1.TBL_BRANDS
-                             on ca.BrandId equals br.Id
+                             on ca.BrandId equals br.brandId
                              
                              select new RentalDetailDto
                              {

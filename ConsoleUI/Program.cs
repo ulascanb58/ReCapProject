@@ -141,7 +141,7 @@ namespace ConsoleUI
                foreach (var items in result.Data)
                {
                    
-                  Console.WriteLine("Arabanın Id'si : " + items.CarId + "\n" + "Arabanın adı  : " + items.CarDescription + "\n" + "Arabanın modeli : " + items.BrandName + "\n" + "Arabanın rengi : " + items.ColorName);
+                  Console.WriteLine("Arabanın Id'si : " + items.CarId + "\n" + "Arabanın adı  : " + items.Description + "\n" + "Arabanın modeli : " + items.BrandName + "\n" + "Arabanın rengi : " + items.ColorName);
                    Console.WriteLine("***********************************");
                    
                 }
@@ -240,7 +240,7 @@ namespace ConsoleUI
         private static void GetCarById(int id)
         {
             CarManager carManager = new CarManager(new EfCarDAL());
-           Console.WriteLine(carManager.GetCarsById(id).Data);
+           Console.WriteLine(carManager.GetCarById(id).Data);
         }
 
         private static void GetCarByPrice(decimal min, decimal max)

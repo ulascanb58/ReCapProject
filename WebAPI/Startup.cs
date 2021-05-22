@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,29 +39,24 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //IoC - Hangi interfacenin karþýlýðý nedir
+            //IoC - Hangi interfacenin karÃ¾Ã½lÃ½Ã°Ã½ nedir
             /*
             services.AddSingleton<IUserService, UserManager>();
             services.AddSingleton<IUserDAL, EfUserDAL>();
-
             services.AddSingleton<IRentalService, RentalManager>();
             services.AddSingleton<IRentalDAL, EfRentalDAL>();
-
             services.AddSingleton<ICustomerService, CustomerManager>();
             services.AddSingleton<ICustomerDAL, EfCustomerDAL>();
-
             services.AddSingleton<IColorService, ColorManager>();
             services.AddSingleton<IColorDAL, EfColorDAL>();
-
             services.AddSingleton<ICarService, CarManager>();
             services.AddSingleton<ICarDAL, EfCarDAL>();
-
             services.AddSingleton<IBrandService, BrandManager>();
             services.AddSingleton<IBrandDAL, EfBrandDAL>();*/
 
             services.AddCors();
 
-          
+
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<NTokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -94,7 +89,7 @@ namespace WebApi
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:3535").AllowAnyHeader());
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

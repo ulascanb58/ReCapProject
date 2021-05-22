@@ -40,8 +40,8 @@ namespace DataAccess.Concrete.EntityFramework
             using (ProjectDBContext context1 = new ProjectDBContext())
             {
                 var result = from c in context1.TBL_CARS
-                             join b in context1.TBL_BRANDS on c.BrandId equals b.Id
-                             join cl in context1.TBL_COLORS on c.ColorId equals cl.Id
+                             join b in context1.TBL_BRANDS on c.BrandId equals b.brandId
+                             join cl in context1.TBL_COLORS on c.ColorId equals cl.colorId
                              select new CarDetailDto
                              {
                                  CarId=c.Id,
