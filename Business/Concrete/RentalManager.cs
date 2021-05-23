@@ -71,5 +71,19 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_iRentalDal.GetRentalDetails());
         }
+
+        public IResult isCarAvailable(NRental rental)
+        {
+            var result = _iRentalDal.GetAll(r => r.CarId == rental.CarId);
+
+            if (result.Any(r => r.RentDate != null && r.ReturnDate == null))
+            {
+                return new ErrorResult("Messages.CarIsNotAvailable");
+            }
+            else
+            {
+                return new SuccessResult();
+            }
+        }
     }
 }

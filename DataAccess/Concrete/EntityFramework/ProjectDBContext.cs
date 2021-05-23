@@ -24,6 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<NCarImage> TBL_CARIMAGES { get; set; }
         public DbSet<NOperationClaim> TBL_OPERATION_CLAIMS { get; set; }
         public DbSet<NUserOperationClaim> TBL_USER_OPERATION_CLAIMS { get; set; }
+        public DbSet<NCreditCard> TBL_CREDITCARDS { get; set; }
     }
 
 
